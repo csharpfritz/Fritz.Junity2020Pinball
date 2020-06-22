@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
 
 	private void HandleFlippers()
 	{
-		throw new NotImplementedException();
+		// throw new NotImplementedException();
 	}
 
 
