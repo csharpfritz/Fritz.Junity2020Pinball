@@ -13,12 +13,15 @@ public class Plunger : MonoBehaviour
 	private Vector3 _StartingPosition;
 	private float _PullDistance = 0;
 	private bool _Released = false;
+	private bool _WaitingToContact = false;
+	private Rigidbody _rb;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 
 		_StartingPosition = transform.localPosition;
+		_rb = GetComponent<Rigidbody>();
 
 	}
 
@@ -27,6 +30,18 @@ public class Plunger : MonoBehaviour
 	{
 
 		HandlePlunger();
+
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+
+		if (!_WaitingToContact) return;
+
+		var pinball = collision.collider.attachedRigidbody;
+		pinball.AddRelativeForce(0, 0, 20, ForceMode.Impulse);
+
+		_WaitingToContact = false;
 
 	}
 
@@ -63,6 +78,7 @@ public class Plunger : MonoBehaviour
 
 		_PullDistance = 0;
 		_Released = true;
+		_WaitingToContact = true;
 
 		if (transform.localPosition == _StartingPosition) {
 			_Released = false;
