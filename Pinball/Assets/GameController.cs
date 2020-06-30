@@ -37,8 +37,18 @@ public class GameController : MonoBehaviour
 	private void HandleFlippers()
 	{
 
-		if (Input.GetKey(KeyCode.LeftShift)) LeftFlipper.Flip();
-		if (Input.GetKey(KeyCode.RightShift)) RightFlipper.Flip();
+		if (Input.GetKey(KeyCode.LeftShift))
+		{
+			LeftFlipper.Flip();
+		} else {
+			LeftFlipper.Unflip();
+		}
+		if (Input.GetKey(KeyCode.RightShift))
+		{
+			RightFlipper.Flip();
+		} else {
+			RightFlipper.Unflip();
+		}
 
 
 	}
